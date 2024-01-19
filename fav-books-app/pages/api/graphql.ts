@@ -14,7 +14,7 @@ const typeDefs = `#graphql
     image: String
     createdAt: String
     updatedAt: String
-    author: [Author]
+    authors: [Author]
    }
    
    type Author {
@@ -30,8 +30,13 @@ const typeDefs = `#graphql
 
 const resolvers = {
     Query: {
-        novels: async(parent: any, args: any, context: Context) => {
+        novels: async (parent: any, args: any, context: Context) => {
             return await context.prisma.novel.findMany();
+        }
+    },
+    Novel: {
+        authors: async (parent: any, args: any, context: Context) => {
+            return await context.prisma.author.findMany();
         }
     },
 };
@@ -42,5 +47,5 @@ const apolloServer = new ApolloServer<Context>({
 });
 
 export default startServerAndCreateNextHandler(apolloServer, {
-    context: async(req, res) => ({req, res, prisma})
+    context: async (req, res) => ({req, res, prisma})
 });
