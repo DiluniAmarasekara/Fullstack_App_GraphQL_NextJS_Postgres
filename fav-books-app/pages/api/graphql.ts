@@ -27,6 +27,12 @@ const typeDefs = `#graphql
     novel(id: ID!): Novel
     novels: [Novel]
   }
+  
+  type Mutation {
+    addNovel(image: String, title: String): Novel
+    updateNovel(id: ID!, image: String, title: String): Novel
+    deleteNovel(id: ID!): Novel
+  }
 `;
 
 const resolvers = {
@@ -48,6 +54,34 @@ const resolvers = {
                 where: {
                     novelId: parent.id,
                 }
+            });
+        }
+    },
+    Mutation: {
+        addNovel: async (parent: any, args: any, context: Context) => {
+            return await context.prisma.novel.create({
+                data: {
+                    title: args.title,
+                    image: args.image,
+                }
+            });
+        },
+        updateNovel: async (parent: any, args: any, context: Context) => {
+            return await context.prisma.novel.update({
+                where: {
+                    id: args.id,
+                },
+                data: {
+                    title: args.title,
+                    image: args.image,
+                }
+            });
+        },
+        deleteNovel: async (parent: any, args: any, context: Context) => {
+            return await context.prisma.novel.delete({
+                where: {
+                    id: args.id,
+                },
             });
         }
     },
