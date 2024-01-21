@@ -31,10 +31,7 @@ export const Novel = ({novel}: Props) => {
             <h1 className="font-bold text-xl my-2">{novel.title}</h1>
             {/* description */}
             <p className="text-xs my-2 line-clamp-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                ab recusandae repudiandae ratione quia voluptatibus tempora
-                dolores, veritatis cum, soluta numquam voluptatum earum
-                obcaecati illum dolor. Fuga incidunt maxime culpa.
+                {novel.desc}
             </p>
             {/* source and date */}
             <div className="flex justify-between italic	 ß text-xs mt-auto  text-slate-500">

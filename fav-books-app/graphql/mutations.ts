@@ -1,8 +1,8 @@
 import {gql} from "@apollo/client";
 
 export const ADD_NOVEL = gql`
-	mutation AddNovel($image: String, $title: String) {
-		addNovel(image: $image, title: $title) {
+	mutation AddNovel($image: String, $title: String, $desc: String) {
+		addNovel(image: $image, title: $title, desc: $desc) {
 			authors {
 				id
 				name
@@ -13,6 +13,7 @@ export const ADD_NOVEL = gql`
 			image
 			title
 			updatedAt
+			desc
 		}
 	}
 `;
@@ -28,11 +29,12 @@ export const DELETE_NOVEL = gql`
 `;
 
 export const UPDATE_NOVEL = gql`
-	mutation UpdateNovel($id: ID!, $title: String, $image: String) {
-		updateNovel(id: $id, title: $title, image: $image) {
+	mutation UpdateNovel($id: ID!, $title: String, $image: String, $desc: String) {
+		updateNovel(id: $id, title: $title, image: $image, desc: $desc) {
 			id
 			image
 			title
+			desc
 		}
 	}
 `;

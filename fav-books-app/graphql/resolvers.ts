@@ -28,6 +28,7 @@ export const resolvers = {
                 data: {
                     title: args.title,
                     image: args.image,
+                    desc: args.desc,
                 }
             });
         },
@@ -39,6 +40,7 @@ export const resolvers = {
                 data: {
                     title: args.title,
                     image: args.image,
+                    desc: args.desc,
                 }
             });
         },

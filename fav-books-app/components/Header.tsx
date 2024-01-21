@@ -8,7 +8,7 @@ export const Header = () => {
                 <span className="underline underline-offset-8 decoration-red-500">
 					Books{" "}
 				</span>
-                Of All Time
+                Management
             </h1>
         </nav>
     );

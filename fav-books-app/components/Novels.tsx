@@ -11,9 +11,10 @@ import { ADD_NOVEL } from "@/graphql/mutations";
 export const Novels = () => {
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
+    const [desc, setDesc] = useState("");
     const { data, loading, error } = useQuery(GET_NOVELS);
     const [addNovel] = useMutation(ADD_NOVEL, {
-        variables: { image, title },
+        variables: { image, title, desc },
         refetchQueries: [{ query: GET_NOVELS }],
     });
 
@@ -23,9 +24,10 @@ export const Novels = () => {
         e.preventDefault();
         if (image === "" || title === "") return alert("Enter fields");
 
-        addNovel({ variables: { image, title } });
+        addNovel({ variables: { image, title, desc } });
         setTitle("");
         setImage("");
+        setDesc("");
     };
 
     if (loading)
@@ -56,6 +58,13 @@ export const Novels = () => {
                     onChange={(e) => setImage(e.target.value)}
                     type="text"
                     placeholder="Enter Image url"
+                    className="bg-transparent border text-white p-2 rounded-lg"
+                />
+                <input
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    type="text"
+                    placeholder="Enter Description"
                     className="bg-transparent border text-white p-2 rounded-lg"
                 />
                 <button className="bg-yellow-500 p-2 rounded-lg ">

@@ -8,6 +8,7 @@ export const GET_NOVELS = gql`
 			createdAt
 			title
 			updatedAt
+			desc
 			authors {
 				id
 				name
@@ -28,6 +29,7 @@ export const GET_NOVEL = gql`
 			id
 			image
 			title
+			desc
 		}
 	}
 `;

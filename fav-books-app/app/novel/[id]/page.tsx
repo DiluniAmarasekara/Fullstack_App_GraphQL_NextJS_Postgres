@@ -14,6 +14,7 @@ type Props = {
 const Novel = ({ params: { id } }: Props) => {
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
+    const [desc, setDesc] = useState("");
     const [name, setName] = useState("");
 
     const { data, loading, error } = useQuery(GET_NOVEL, {
@@ -29,7 +30,7 @@ const Novel = ({ params: { id } }: Props) => {
     });
 
     const [updateNovel] = useMutation(UPDATE_NOVEL, {
-        variables: { id: id, title: title, image: url },
+        variables: { id: id, title: title, image: url, desc: desc },
         refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
     });
 
@@ -44,10 +45,11 @@ const Novel = ({ params: { id } }: Props) => {
 
     const handleUpdateNovel = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (title === "" || url === "") return alert("Please enter fields");
-        updateNovel({ variables: { id: id, title: title, image: url } });
+        if (title === "" || url === "" || desc === "") return alert("Please enter fields");
+        updateNovel({ variables: { id: id, title: title, image: url, desc: desc } });
         setTitle("");
         setUrl("");
+        setDesc("");
     };
 
     if (loading)
@@ -93,14 +95,7 @@ const Novel = ({ params: { id } }: Props) => {
                         ))}
                     </div>
                     <p className="text-slate-400 ">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Architecto cum nam sed voluptates sunt aliquid nemo
-                        maxime itaque tempora, autem alias nostrum molestiae
-                        deserunt earum animi numquam reprehenderit laboriosam
-                        libero? Quas, atque totam vero nostrum dolore, nihil
-                        autem neque architecto deserunt illo itaque, ab quae
-                        ipsam corrupti ipsum quaerat? Sed hic ipsum excepturi
-                        earum minus consectetur soluta totam temporibus libero.
+                        {novel.desc}
                     </p>
                     {/* add author form */}
                     <form onSubmit={handleAddAuthor} className="mt-5 space-x-2">
@@ -134,6 +129,13 @@ const Novel = ({ params: { id } }: Props) => {
                     onChange={(e) => setUrl(e.target.value)}
                     type="text"
                     placeholder="new url"
+                    className="bg-transparent border text-white p-2 rounded-lg"
+                />
+                <input
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    type="text"
+                    placeholder="Enter new description"
                     className="bg-transparent border text-white p-2 rounded-lg"
                 />
                 <button className="bg-yellow-500 rounded-lg p-2">Update</button>
