@@ -20,6 +20,7 @@ The architecture diagrams above illustrates the main components of the applicati
 ## Features
 
 - **Use Case Diagram:**
+
   ![Use Diagram](screenshots/usecase.png)
 
 - **CRUD Operations:**
